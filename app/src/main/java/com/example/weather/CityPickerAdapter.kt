@@ -1,0 +1,52 @@
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.weather.CityPickerFragment
+import com.example.weather.R
+
+/**
+ * Adapter for the [RecyclerView] in [CityPickerFragment].
+ */
+
+class CityPickerAdapter(private val dataSet: List<Int>, private val context: Context?) :
+    RecyclerView.Adapter<CityPickerAdapter.ViewHolder>() {
+
+    /**
+     * Provide a reference to the type of views that you are using
+     * (custom ViewHolder)
+     */
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textView: TextView
+
+        init {
+            // Define click listener for the ViewHolder's View
+            textView = view.findViewById(R.id.cityTextView)
+        }
+    }
+
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        // Create a new view, which defines the UI of the list item
+        val view = LayoutInflater.from(context)
+            .inflate(R.layout.city_item, viewGroup, false)
+
+        return ViewHolder(view)
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
+        // Get element from your dataset at this position and replace the
+        // contents of the view with that element
+        viewHolder.textView.text = context?.resources?.getString(R.string.list_item, position)
+    }
+
+    override fun getItemCount(): Int {
+        return dataSet.size
+    }
+
+}

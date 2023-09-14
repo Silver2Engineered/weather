@@ -4,14 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2D71B6"
-    tools:context=".CityPicker">
+    tools:context=".CityPickerFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_world"
-        android:textColor="#FFFFFF"
-        android:textSize="34sp" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
