@@ -1,18 +1,18 @@
-
+package com.example.weather
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather.CityPickerFragment
-import com.example.weather.R
+import com.example.weather.network.City
 
 /**
  * Adapter for the [RecyclerView] in [CityPickerFragment].
  */
 
-class CityPickerAdapter(private val dataSet: List<Int>, private val context: Context?) :
+class CityPickerAdapter(private val dataSet: MutableLiveData<List<City>>, private val context: Context?) :
     RecyclerView.Adapter<CityPickerAdapter.ViewHolder>() {
 
     /**
@@ -46,7 +46,8 @@ class CityPickerAdapter(private val dataSet: List<Int>, private val context: Con
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        val citiesList: List<City> = dataSet.value ?: emptyList()
+        return citiesList.size
     }
 
 }
