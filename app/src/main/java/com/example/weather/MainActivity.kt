@@ -1,11 +1,13 @@
 package com.example.weather
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.example.weather.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_city_picker)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }
