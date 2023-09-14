@@ -7,7 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 private const val BASE_URL =
-    "TODO"
+    "https://TODO"
 
 /**
  * Build the Moshi object with Kotlin adapter factory that Retrofit will be using.
