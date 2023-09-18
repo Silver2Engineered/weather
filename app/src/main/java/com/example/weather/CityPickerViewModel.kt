@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.network.City
 import com.example.weather.network.WeatherApi
+import com.example.weather.network.WeatherApiResponse
 import kotlinx.coroutines.launch
 
 class CityPickerViewModel : ViewModel() {
@@ -27,7 +28,8 @@ class CityPickerViewModel : ViewModel() {
     private fun getCities() {
         viewModelScope.launch {
             try {
-                _cities.value = WeatherApi.retrofitService.getCities()
+                val response: WeatherApiResponse = WeatherApi.retrofitService.getCities()
+               _cities.value = response.list
             } catch (e: Exception) {
                 _cities.value = listOf()
             }

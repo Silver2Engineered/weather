@@ -6,8 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL =
-    "https://TODO"
+private const val BASE_URL = "https://api.openweathermap.org/"
+
 
 /**
  * Build the Moshi object with Kotlin adapter factory that Retrofit will be using.
@@ -28,8 +28,8 @@ private val retrofit = Retrofit.Builder()
  * A public interface that exposes the [getCities] method
  */
 interface WeatherApiService {
-    @GET("getCities")
-    suspend fun getCities() : List<City>
+    @GET("data/2.5/group?id=4772354,5368361,5128581,4887398,4699066,5809844,5856195,5419384,5391959,4684888,5746545,4990729,4335045&appid=bd4472d97ca0b479dc32513cf50a1bf3&units=imperial.json")
+    suspend fun getCities() : WeatherApiResponse
 }
 
 /**
