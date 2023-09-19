@@ -29,10 +29,10 @@ private val retrofit = Retrofit.Builder()
  * A public interface that exposes the [getCities] method
  */
 interface WeatherApiService {
-    @GET("data/2.5/group?id={cityIds}&appid={appId}&units={units}.json")
+    @GET("data/2.5/group")
     suspend fun getCities(
-            @Query("cityIds") cityId: String,
-            @Query("appId") appId: String,
+            @Query("id") cityId: String,
+            @Query("appid") appId: String,
             @Query("units") units: String
     ) : WeatherApiResponse
 }

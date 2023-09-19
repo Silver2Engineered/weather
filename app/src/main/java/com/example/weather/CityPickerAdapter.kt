@@ -35,20 +35,20 @@ class CityPickerAdapter(private val dataSet: LiveData<List<City>>, private val c
         val dataSetValues: List<City>? = dataSet.value
         viewHolder.binding.name.text = dataSetValues?.get(position)?.name.toString()
         viewHolder.binding.country.text = dataSetValues?.get(position)?.sys?.country.toString()
-        viewHolder.binding.temp.text = context?.resources?.getString(R.string.temp, convertKelvinToFahrenheit(dataSetValues?.get(position)?.main?.temp).toString())
+        viewHolder.binding.temp.text = context?.resources?.getString(R.string.temp, convertCelsiusToFahrenheit(dataSetValues?.get(position)?.main?.temp).toString())
         viewHolder.binding.lowAndHigh.text = formatLowAndHigh(dataSetValues, position)
         viewHolder.binding.humidity.text = context?.resources?.getString(R.string.humidity, dataSetValues?.get(position)?.main?.humidity.toString())
     }
 
     private fun formatLowAndHigh(dataSetValues: List<City>?, position: Int): String {
-        val low = convertKelvinToFahrenheit(dataSetValues?.get(position)?.main?.temp_min).toString()
-        val high = convertKelvinToFahrenheit(dataSetValues?.get(position)?.main?.temp_max).toString()
+        val low = convertCelsiusToFahrenheit(dataSetValues?.get(position)?.main?.temp_min).toString()
+        val high = convertCelsiusToFahrenheit(dataSetValues?.get(position)?.main?.temp_max).toString()
         return "$low\u2109/$high\u2109"
     }
 
-    private fun convertKelvinToFahrenheit(temp: Double?): Int {
+    private fun convertCelsiusToFahrenheit(temp: Double?): Int {
         return if (temp != null) {
-            return ((temp - 273.15) * 9/5 + 32).toInt()
+            return (temp * 9/5 + 32).toInt()
         } else 0
     }
 
