@@ -1,5 +1,6 @@
 package com.example.weather
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,13 +12,15 @@ import kotlinx.coroutines.launch
 
 class CityPickerViewModel : ViewModel() {
 
-    private val _cities = MutableLiveData<List<City>>()
+    private var _cities = MutableLiveData<List<City>>()
 
-    val cities: MutableLiveData<List<City>>
-        get() = _cities
+    val cities: LiveData<List<City>> = _cities
+    private val cityIds = "4772354,5368361,5128581,4887398,4699066,5809844,5856195,5419384,5391959,4684888,5746545,4990729,4335045"
+    private val appId = "bd4472d97ca0b479dc32513cf50a1bf3"
+    private val units = "metric"
 
     init {
-        getCities()
+        getCityInfo()
     }
 
     /**
@@ -25,10 +28,11 @@ class CityPickerViewModel : ViewModel() {
      * [cities] [List] [LiveData].
      */
 
-    private fun getCities() {
+    private fun getCityInfo() {
         viewModelScope.launch {
             try {
-                val response: WeatherApiResponse = WeatherApi.retrofitService.getCities()
+                val response: WeatherApiResponse = WeatherApi.retrofitService.getCities(cityIds, appId, units)
+                Log.d("hi17", response.toString())
                _cities.value = response.list
             } catch (e: Exception) {
                 _cities.value = listOf()

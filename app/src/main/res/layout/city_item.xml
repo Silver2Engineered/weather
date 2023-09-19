@@ -6,8 +6,9 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="16dp"
     app:cardBackgroundColor="#0C1D46"
-    android:layout_margin="20dp"
-    android:elevation="4dp">
+    android:layout_margin="8dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -15,7 +16,7 @@
     android:gravity="center_vertical">
 
     <TextView
-        android:id="@+id/Name"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
@@ -28,31 +29,31 @@
         tools:text="Chicago" />
 
     <TextView
-        android:id="@+id/Country"
+        android:id="@+id/country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/Name"
-        app:layout_constraintTop_toBottomOf="@id/Name"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name"
         android:paddingLeft="16dp"
         tools:text="US" />
 
     <TextView
-        android:id="@+id/Temp"
+        android:id="@+id/temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingBottom="0dp"
         android:textColor="@color/white"
         android:textSize="60sp"
-        app:layout_constraintStart_toStartOf="@id/Name"
-        app:layout_constraintTop_toBottomOf="@id/Country"
-        app:layout_constraintBottom_toBottomOf="@id/Humidity"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/country"
+        app:layout_constraintBottom_toBottomOf="@id/humidity"
         tools:text="37\u2109" />
 
     <TextView
-        android:id="@+id/LowAndHigh"
+        android:id="@+id/lowAndHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"
@@ -62,11 +63,11 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/Temp"
+        app:layout_constraintTop_toTopOf="@id/temp"
         tools:text="32\u2109/64\u2109" />
 
     <TextView
-        android:id="@+id/Humidity"
+        android:id="@+id/humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"
@@ -81,7 +82,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/Humidity"
+        app:layout_constraintEnd_toStartOf="@id/humidity"
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingBottom="20dp"
         android:paddingRight="8dp"
