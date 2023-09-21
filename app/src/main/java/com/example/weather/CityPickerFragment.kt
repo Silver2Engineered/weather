@@ -33,6 +33,7 @@ class CityPickerFragment : Fragment() {
         cityPickerAdapter = CityPickerAdapter(context)
         viewModel.cities.observe(viewLifecycleOwner) {cityPickerAdapter.updateCityData(it)}
         viewModel.getCityInfo()
+        cityPickerAdapter.notifyDataSetChanged()
     }
 
 }
