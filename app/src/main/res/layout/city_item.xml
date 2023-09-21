@@ -13,7 +13,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="164sp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:elevation="4dp">
 
     <TextView
         android:id="@+id/name"

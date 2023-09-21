@@ -11,7 +11,7 @@ import com.example.weather.network.City
  * Adapter for the [RecyclerView] in [CityPickerFragment].
  */
 
-class CityPickerAdapter(private val dataSet: LiveData<List<City>>, private val context: Context?) :
+class CityPickerAdapter(private val context: Context?, private var dataSet: List<City> = listOf()) :
     RecyclerView.Adapter<CityPickerAdapter.ViewHolder>() {
 
     /**
@@ -32,17 +32,17 @@ class CityPickerAdapter(private val dataSet: LiveData<List<City>>, private val c
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val dataSetValues: List<City>? = dataSet.value
-        viewHolder.binding.name.text = dataSetValues?.get(position)?.name.toString()
-        viewHolder.binding.country.text = dataSetValues?.get(position)?.sys?.country.toString()
-        viewHolder.binding.temp.text = context?.resources?.getString(R.string.temp, convertCelsiusToFahrenheit(dataSetValues?.get(position)?.main?.temp).toString())
-        viewHolder.binding.lowAndHigh.text = formatLowAndHigh(dataSetValues, position)
-        viewHolder.binding.humidity.text = context?.resources?.getString(R.string.humidity, dataSetValues?.get(position)?.main?.humidity.toString())
+        val data: City? = dataSet.get(position)
+        viewHolder.binding.name.text = data?.name.toString()
+        viewHolder.binding.country.text = data?.sys?.country.toString()
+        viewHolder.binding.temp.text = context?.resources?.getString(R.string.temp, convertCelsiusToFahrenheit(data?.main?.temp).toString())
+        viewHolder.binding.lowAndHigh.text = formatLowAndHigh(data, position)
+        viewHolder.binding.humidity.text = context?.resources?.getString(R.string.humidity, data?.main?.humidity.toString())
     }
 
-    private fun formatLowAndHigh(dataSetValues: List<City>?, position: Int): String {
-        val low = convertCelsiusToFahrenheit(dataSetValues?.get(position)?.main?.temp_min).toString()
-        val high = convertCelsiusToFahrenheit(dataSetValues?.get(position)?.main?.temp_max).toString()
+    private fun formatLowAndHigh(data: City?, position: Int): String {
+        val low = convertCelsiusToFahrenheit(data?.main?.temp_min).toString()
+        val high = convertCelsiusToFahrenheit(data?.main?.temp_max).toString()
         return "$low\u2109/$high\u2109"
     }
 
@@ -53,8 +53,12 @@ class CityPickerAdapter(private val dataSet: LiveData<List<City>>, private val c
     }
 
     override fun getItemCount(): Int {
-        val citiesList: List<City> = dataSet.value ?: emptyList()
+        val citiesList: List<City> = dataSet
         return citiesList.size
+    }
+
+    fun updateCityData(cities: List<City>) {
+        dataSet = cities
     }
 
 }

@@ -31,9 +31,9 @@ private val retrofit = Retrofit.Builder()
 interface WeatherApiService {
     @GET("data/2.5/group")
     suspend fun getCities(
-            @Query("id") cityId: String,
-            @Query("appid") appId: String,
-            @Query("units") units: String
+        @Query("id") cityId: String,
+        @Query("appid") appId: String,
+        @Query("units") units: String
     ) : WeatherApiResponse
 }
 

@@ -14,6 +14,7 @@ class CityPickerFragment : Fragment() {
 
     private val viewModel: CityPickerViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var cityPickerAdapter: CityPickerAdapter
     private var _binding: FragmentCityPickerBinding? = null
     private val binding get() = _binding!!
 
@@ -29,9 +30,9 @@ class CityPickerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = CityPickerAdapter(viewModel.cities, context)
-
-
+        cityPickerAdapter = CityPickerAdapter(context)
+        viewModel.cities.observe(viewLifecycleOwner) {cityPickerAdapter.updateCityData(it)}
+        viewModel.getCityInfo()
     }
 
 }

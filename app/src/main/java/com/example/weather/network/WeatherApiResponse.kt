@@ -52,3 +52,8 @@ data class Weather(
     val main: String
 )
 
+data class Wind(
+    val deg: Int,
+    val speed: Double
+)
+
