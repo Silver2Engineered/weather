@@ -59,6 +59,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
 
     fun updateCityData(cities: List<City>) {
         dataSet = cities
+        notifyDataSetChanged()
     }
 
 }
