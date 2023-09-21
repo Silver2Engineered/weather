@@ -8,13 +8,13 @@
     app:cardBackgroundColor="#0C1D46"
     android:layout_margin="8dp"
     app:cardUseCompatPadding="true"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:elevation="4dp">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="164sp"
-    android:gravity="center_vertical"
-    android:elevation="4dp">
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/name"

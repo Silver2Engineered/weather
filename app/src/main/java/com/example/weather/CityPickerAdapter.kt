@@ -53,8 +53,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
     }
 
     override fun getItemCount(): Int {
-        val citiesList: List<City> = dataSet
-        return citiesList.size
+        return dataSet.size
     }
 
     fun updateCityData(cities: List<City>) {

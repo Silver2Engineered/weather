@@ -32,7 +32,9 @@ class CityPickerFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         cityPickerAdapter = CityPickerAdapter(context)
         recyclerView.adapter = cityPickerAdapter
-        viewModel.cities.observe(viewLifecycleOwner) {cityPickerAdapter.updateCityData(it)}
+        viewModel.cities.observe(viewLifecycleOwner) {
+            cityPickerAdapter.updateCityData(it)
+        }
         viewModel.getCityInfo()
     }
 
