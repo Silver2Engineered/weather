@@ -1,7 +1,6 @@
 package com.example.weather
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -19,17 +18,14 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder)
      */
-    class ViewHolder(val binding: CityItemBinding, val view: View) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: CityItemBinding) : RecyclerView.ViewHolder(binding.root) {
     }
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val layout = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.city_item, parent, false)
         val binding = CityItemBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding, layout)
+        return ViewHolder(binding)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -45,7 +41,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
         viewHolder.binding.humidity.text = context?.resources?.getString(R.string.humidity, data?.main?.humidity.toString())
         viewHolder.binding.card.setOnClickListener {
             val action = CityPickerFragmentDirections.actionCityPickerFragmentToDetailsFragment(city = viewHolder.binding.name.text.toString())
-            viewHolder.view.findNavController().navigate(action)
+            viewHolder.binding.root.findNavController().navigate(action)
         }
     }
 
