@@ -75,6 +75,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:3.9.0")
     implementation ("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.android.material:material:1.8.0")
     // Retrofit with Moshi Converter
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
