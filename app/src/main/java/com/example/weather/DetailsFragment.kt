@@ -41,6 +41,11 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.detailsTextView.text = cityId
+    }
+
     /**
      * Frees the binding object when the Fragment is destroyed.
      */
