@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.weather.databinding.FragmentDetailsBinding
+import com.example.weather.network.CityData
 
 
 class DetailsFragment : Fragment() {
@@ -41,9 +42,14 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.detailsTextView.text = viewModel.cityData.value.toString()
         viewModel.cityData.observe(viewLifecycleOwner) {
-            viewModel.cityData.value = it
+            binding.name.text = it?.name.toString()
+            binding.country.text = it?.sys?.country.toString()
+            binding.temp.text = it?.main?.temp.toString()
+            binding.lowAndHigh.text = formatLowAndHighDetails(it)
+            binding.humidityAmount.text = it?.main?.humidity.toString()
+            binding.windspeedAmount.text = it?.wind?.speed.toString()
+            binding.pressureAmount.text = it?.main?.pressure.toString()
         }
         viewModel.getCityWeather(cityId)
     }
@@ -54,5 +60,17 @@ class DetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun formatLowAndHighDetails(it: CityData?): String {
+        val low = convertCelsiusToFahrenheit(it?.main?.temp_min).toString()
+        val high = convertCelsiusToFahrenheit(it?.main?.temp_max).toString()
+        return "$low\u2109/$high\u2109"
+    }
+
+    private fun convertCelsiusToFahrenheit(temp: Double?): Int {
+        return if (temp != null) {
+            return (temp * 9/5 + 32).toInt()
+        } else 0
     }
 }

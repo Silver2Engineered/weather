@@ -21,7 +21,7 @@ class DetailsViewModel : ViewModel() {
     fun getCityWeather(cityId: String) {
         viewModelScope.launch {
             try {
-                val response: CityData = WeatherApi.retrofitService.getCityData(cityId, appId)
+                val response: CityData = WeatherApi.retrofitService.getCityData(cityId, appId, units)
                 _cityData.value = response
             } catch (e: Exception) {
                 _cityData.value = null
