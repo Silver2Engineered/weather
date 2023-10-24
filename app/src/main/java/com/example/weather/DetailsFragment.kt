@@ -42,6 +42,9 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.detailsTextView.text = viewModel.cityData.value.toString()
+        viewModel.cityData.observe(viewLifecycleOwner) {
+            viewModel.cityData.value = it
+        }
         viewModel.getCityWeather(cityId)
     }
 
