@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.weather.databinding.FragmentDetailsBinding
 
 
 class DetailsFragment : Fragment() {
 
     private lateinit var cityId: String
+    private val viewModel: DetailsViewModel by viewModels()
 
     companion object {
         val CITY = "city"
@@ -43,7 +45,8 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.detailsTextView.text = cityId
+        binding.detailsTextView.text = viewModel.cityData.value.toString()
+        viewModel.getCityWeather(cityId)
     }
 
     /**
