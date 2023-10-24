@@ -42,7 +42,7 @@ data class Sys(
     val country: String,
     val sunrise: Int,
     val sunset: Int,
-    val timezone: Int = -1
+    val timezone: Int = 0
 )
 
 data class Weather(

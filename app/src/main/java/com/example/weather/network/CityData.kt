@@ -10,7 +10,7 @@ data class CityData(
     val main: Main,
     val name: String,
     val sys: Sys,
-    val timezone: Int = -1,
+    val timezone: Int,
     val visibility: Int,
     val weather: List<Weather>,
     val wind: Wind

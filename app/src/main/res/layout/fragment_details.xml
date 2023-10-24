@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/weatherIcon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:paddingTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +156,37 @@
         android:text="Windspeed" />
 
     <TextView
-        android:id="@+id/humidityLabel"
+        android:id="@+id/sunriseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pressureLabel"
+        android:text="Sunrise" />
+
+    <TextView
+        android:id="@+id/sunsetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:textColor="@color/white"
+        android:paddingLeft="16dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sunriseLabel"
+        android:text="Sunset" />
+
+    <TextView
+        android:id="@+id/pressureLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -168,21 +198,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/windspeedLabel"
-        android:text="Humidity" />
-
-    <TextView
-        android:id="@+id/pressureLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:fontFamily="sans-serif-light"
-        android:paddingRight="16dp"
-        android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/humidityLabel"
         android:text="Pressure" />
 
     <TextView
@@ -202,21 +217,6 @@
         tools:text="9.22 MPH" />
 
     <TextView
-        android:id="@+id/humidityAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif-light"
-        android:paddingLeft="16dp"
-        android:paddingBottom="16dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/windspeedLabel"
-        tools:text="65%" />
-
-    <TextView
         android:id="@+id/pressureAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -228,7 +228,37 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/humidityLabel"
+        app:layout_constraintTop_toBottomOf="@id/windspeedAmount"
         tools:text="1016 hPa" />
+
+    <TextView
+        android:id="@+id/sunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="16dp"
+        android:paddingBottom="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pressureAmount"
+        tools:text="6:15 AM" />
+
+    <TextView
+        android:id="@+id/sunset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="16dp"
+        android:paddingBottom="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sunrise"
+        tools:text="7:12 PM" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
