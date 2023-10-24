@@ -14,23 +14,11 @@ class DetailsFragment : Fragment() {
     private lateinit var cityId: String
     private val viewModel: DetailsViewModel by viewModels()
 
-    companion object {
-        val CITY = "city"
-    }
-
     private var _binding: FragmentDetailsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Retrieve the LETTER from the Fragment arguments
-        arguments?.let {
-            cityId = it.getString(CITY).toString()
-        }
     }
 
     override fun onCreateView(
@@ -45,6 +33,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cityId =
         binding.detailsTextView.text = viewModel.cityData.value.toString()
         viewModel.getCityWeather(cityId)
     }
