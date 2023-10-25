@@ -2,6 +2,7 @@ package com.example.weather
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
+internal const val base_url = "https://openweathermap.org/img/wn/"
+internal const val url_suffix = "@2x.png"
 class DetailsFragment : Fragment() {
 
     private lateinit var cityId: String
@@ -94,10 +97,9 @@ class DetailsFragment : Fragment() {
         binding.description.text = it!!.weather[0].description[0].toUpperCase() + it!!.weather[0].description.substring(1)
         binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
         binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
+        Log.e("here123",base_url + it!!.weather[0].icon + url_suffix)
         Glide.with(this)
-            .load(getString(R.string.https_openweathermap_org_img_wn) + it!!.weather[0].icon + getString(
-                R.string._2x_png
-            ))
+            .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()
             .into(binding.weatherIcon)
     }
