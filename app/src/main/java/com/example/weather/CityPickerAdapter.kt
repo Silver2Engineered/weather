@@ -40,7 +40,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
         viewHolder.binding.lowAndHigh.text = formatLowAndHigh(data, position)
         viewHolder.binding.humidity.text = context?.resources?.getString(R.string.humidity, data?.main?.humidity.toString())
         viewHolder.binding.card.setOnClickListener {
-            val action = CityPickerFragmentDirections.actionCityPickerFragmentToDetailsFragment(city = viewHolder.binding.name.text.toString())
+            val action = CityPickerFragmentDirections.actionCityPickerFragmentToDetailsFragment(city = data?.id.toString())
             viewHolder.binding.root.findNavController().navigate(action)
         }
     }
