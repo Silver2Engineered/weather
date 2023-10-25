@@ -50,20 +50,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.cityData.observe(viewLifecycleOwner) {
-            binding.name.text = it?.name.toString()
-            binding.country.text = it?.sys?.country.toString()
-            binding.temp.text = convertCelsiusToFahrenheit(it?.main?.temp).toString() + "℉"
-            binding.lowAndHigh.text = formatLowAndHighDetails(it)
-            binding.humidity.text = it?.main?.humidity.toString() + "%"
-            binding.windspeedAmount.text = it?.wind?.speed.toString() + " m/s"
-            binding.pressureAmount.text = it?.main?.pressure.toString() + " hPa"
-            binding.description.text = it!!.weather[0].description
-            binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
-            binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
-            Glide.with(this)
-                .load("https://openweathermap.org/img/wn/" + it!!.weather[0].icon + "@2x.png")
-                .centerCrop()
-                .into(binding.weatherIcon)
+            updateBindings(binding, it)
         }
         viewModel.getCityWeather(cityId)
     }
@@ -94,5 +81,24 @@ class DetailsFragment : Fragment() {
         val instant = Instant.ofEpochSecond(timestamp!!.toLong())
         val formatter = DateTimeFormatter.ofPattern("K:mm a", Locale.ENGLISH)
         return instant.atOffset(offset).format(formatter)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateBindings(binding: FragmentDetailsBinding, it: CityData?) {
+        binding.name.text = it?.name.toString()
+        binding.country.text = it?.sys?.country.toString()
+        binding.temp.text = convertCelsiusToFahrenheit(it?.main?.temp).toString() + "℉"
+        binding.lowAndHigh.text = formatLowAndHighDetails(it)
+        binding.humidity.text = it?.main?.humidity.toString() + "%"
+        binding.windspeedAmount.text = it?.wind?.speed.toString() + " m/s"
+        binding.pressureAmount.text = it?.main?.pressure.toString() + " hPa"
+        binding.description.text = it!!.weather[0].description[0].toUpperCase() + it!!.weather[0].description.substring(1)
+        binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
+        binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
+        Glide.with(this)
+            .load(getString(R.string.https_openweathermap_org_img_wn) + it!!.weather[0].icon + getString(
+                R.string._2x_png
+            ))
+            .centerCrop()
+            .into(binding.weatherIcon)
     }
 }
