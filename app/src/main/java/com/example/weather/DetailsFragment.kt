@@ -11,9 +11,10 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.weather.databinding.FragmentDetailsBinding
 import com.example.weather.network.CityData
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.TimeZone
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class DetailsFragment : Fragment() {
 
@@ -89,10 +90,9 @@ class DetailsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun convertTime(timestamp: Int?, timeZoneOffset: Int?): String {
-        val localTimezone = TimeZone.getDefault()
-        val adjustedTime = Date((timestamp!! + timeZoneOffset!!).toLong())
-        val twelveHourFormat = SimpleDateFormat("h:mm a")
-        twelveHourFormat.timeZone = localTimezone
-        return twelveHourFormat.format(adjustedTime)
+        val offset = ZoneOffset.ofTotalSeconds(timeZoneOffset!!)
+        val instant = Instant.ofEpochSecond(timestamp!!.toLong())
+        val formatter = DateTimeFormatter.ofPattern("K:mm a", Locale.ENGLISH)
+        return instant.atOffset(offset).format(formatter)
     }
 }
