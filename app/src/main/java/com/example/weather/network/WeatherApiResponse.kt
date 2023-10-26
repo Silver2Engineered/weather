@@ -1,17 +1,21 @@
 package com.example.weather.network
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class WeatherApiResponse(
     val cnt: Int,
     val list: List<City>
 )
 
+@Entity(tableName = "city_table")
 data class City(
+    @PrimaryKey val name: String,
     val clouds: Clouds,
     val coord: Coord,
     val dt: Int,
     val id: Int,
     val main: Main,
-    val name: String,
     val sys: Sys,
     val visibility: Int,
     val weather: List<Weather>,
