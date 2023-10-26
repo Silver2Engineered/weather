@@ -16,3 +16,15 @@ data class CityData(
     val weather: List<Weather>,
     val wind: Wind
 )
+{
+    fun toCachedModel(): CachedCityData {
+        return CachedCityData(
+            timezone=timezone,
+            name=name,
+            main=main,
+            sys=sys,
+            weather=weather,
+            wind=wind
+        )
+    }
+}
