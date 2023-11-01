@@ -21,8 +21,11 @@ data class CityOverview(
     fun toCachedModel() : CachedCityOverview {
         return CachedCityOverview(
             name=name,
-            main=main,
-            sys=sys
+            country=sys.country,
+            temp=main.temp,
+            temp_max=main.temp_max,
+            temp_min=main.temp_min,
+            humidity=main.humidity
         )
     }
 }

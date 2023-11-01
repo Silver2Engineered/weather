@@ -97,7 +97,6 @@ class DetailsFragment : Fragment() {
         binding.description.text = it!!.weather[0].description[0].toUpperCase() + it!!.weather[0].description.substring(1)
         binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
         binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
-        Log.e("here123",base_url + it!!.weather[0].icon + url_suffix)
         Glide.with(this)
             .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()

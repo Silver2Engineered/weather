@@ -19,12 +19,18 @@ data class CityDetails(
 {
     fun toCachedModel(): CachedCityDetails {
         return CachedCityDetails(
-            timezone=timezone,
             name=name,
-            main=main,
-            sys=sys,
-            weather=weather,
-            wind=wind
+            country=sys.country,
+            temp=main.temp,
+            temp_max=main.temp_max,
+            temp_min=main.temp_min,
+            humidity=main.humidity,
+            wind=wind.speed,
+            pressure=main.pressure,
+            sunrise=sys.sunrise,
+            sunset=sys.sunset,
+            icon=weather[0].icon,
+            description=weather[0].description
         )
     }
 }
