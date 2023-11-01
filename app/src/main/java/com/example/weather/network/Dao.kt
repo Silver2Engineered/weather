@@ -9,10 +9,10 @@ import androidx.room.Query
 interface CityDao {
 
     @Query("SELECT * FROM city_table ORDER BY name ASC")
-    fun getCities(): List<CachedCity>
+    fun getCities(): List<CachedCityOverview>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(cachedCity: CachedCity)
+    suspend fun insert(cachedCity: CachedCityOverview)
 
     @Query("DELETE FROM city_table")
     suspend fun deleteAll()
@@ -22,10 +22,10 @@ interface CityDao {
 interface CityDataDao {
 
     @Query("SELECT * FROM city_table ORDER BY name ASC")
-    fun getCityData(): List<CachedCityData>
+    fun getCityData(): List<CachedCityDetails>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(cachedCityData: CachedCityData)
+    suspend fun insert(cachedCityData: CachedCityDetails)
 
     @Query("DELETE FROM city_table")
     suspend fun deleteAll()

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = arrayOf(City::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(CityOverview::class), version = 1, exportSchema = false)
 public abstract class CityRoomDatabase : RoomDatabase() {
 
     abstract fun cityDao(): CityDao

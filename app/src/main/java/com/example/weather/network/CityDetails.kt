@@ -1,7 +1,7 @@
 package com.example.weather.network
 
 
-data class CityData(
+data class CityDetails(
     val base: String,
     val clouds: Clouds,
     val cod: Int,
@@ -17,8 +17,8 @@ data class CityData(
     val wind: Wind
 )
 {
-    fun toCachedModel(): CachedCityData {
-        return CachedCityData(
+    fun toCachedModel(): CachedCityDetails {
+        return CachedCityDetails(
             timezone=timezone,
             name=name,
             main=main,

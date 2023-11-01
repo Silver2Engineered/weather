@@ -2,10 +2,10 @@ package com.example.weather.network
 
 data class WeatherApiResponse(
     val cnt: Int,
-    val list: List<City>
+    val list: List<CityOverview>
 )
 
-data class City(
+data class CityOverview(
     val name: String,
     val clouds: Clouds,
     val coord: Coord,
@@ -18,8 +18,8 @@ data class City(
     val wind: Wind
 )
 {
-    fun toCachedModel() : CachedCity {
-        return CachedCity(
+    fun toCachedModel() : CachedCityOverview {
+        return CachedCityOverview(
             name=name,
             main=main,
             sys=sys

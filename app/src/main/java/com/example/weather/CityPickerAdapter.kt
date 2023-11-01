@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.CityItemBinding
-import com.example.weather.network.City
+import com.example.weather.network.CityOverview
 
 /**
  * Adapter for the [RecyclerView] in [CityPickerFragment].
  */
 
-class CityPickerAdapter(private val context: Context?, private var dataSet: List<City> = listOf()) :
+class CityPickerAdapter(private val context: Context?, private var dataSet: List<CityOverview> = listOf()) :
     RecyclerView.Adapter<CityPickerAdapter.ViewHolder>() {
 
     /**
@@ -33,7 +33,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val data: City? = dataSet.get(position)
+        val data: CityOverview? = dataSet.get(position)
         viewHolder.binding.name.text = data?.name.toString()
         viewHolder.binding.country.text = data?.sys?.country.toString()
         viewHolder.binding.temp.text = context?.resources?.getString(R.string.temp, convertCelsiusToFahrenheit(data?.main?.temp).toString())
@@ -45,7 +45,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
         }
     }
 
-    private fun formatLowAndHigh(data: City?, position: Int): String {
+    private fun formatLowAndHigh(data: CityOverview?, position: Int): String {
         val low = convertCelsiusToFahrenheit(data?.main?.temp_min).toString()
         val high = convertCelsiusToFahrenheit(data?.main?.temp_max).toString()
         return "$low\u2109/$high\u2109"
@@ -61,7 +61,7 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
         return dataSet.size
     }
 
-    fun updateCityData(cities: List<City>) {
+    fun updateCityData(cities: List<CityOverview>) {
         dataSet = cities
         notifyDataSetChanged()
     }

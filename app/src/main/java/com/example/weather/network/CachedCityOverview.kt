@@ -4,14 +4,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "city_table")
-data class CachedCity(
+data class CachedCityOverview(
     @PrimaryKey val name: String,
     val main: Main,
     val sys: Sys
 )
 {
-    fun toDomainModel(): City {
-        return City(
+    fun toDomainModel(): CityOverview {
+        return CityOverview(
             name=name,
             clouds=Clouds(-1),
             coord=Coord(-1.0,-1.0),

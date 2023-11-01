@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "city_table")
-data class CachedCityData(
+data class CachedCityDetails(
     @PrimaryKey val name: String,
     val main: Main,
     val sys: Sys,
@@ -13,8 +13,8 @@ data class CachedCityData(
     val timezone: Int
 )
 {
-    fun toDomainModel(): CityData {
-        return CityData(
+    fun toDomainModel(): CityDetails {
+        return CityDetails(
             base="",
             cod=-1,
             timezone=timezone,
