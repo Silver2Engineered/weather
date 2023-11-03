@@ -53,7 +53,7 @@ interface WeatherApiService {
         @Query("id") cityId: String,
         @Query("appid") appId: String,
         @Query("units") units: String
-    ) : CityData
+    ) : CityDetails
 }
 
 /**

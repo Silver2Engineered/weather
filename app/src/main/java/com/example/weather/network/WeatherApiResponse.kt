@@ -1,16 +1,12 @@
 package com.example.weather.network
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 data class WeatherApiResponse(
     val cnt: Int,
-    val list: List<City>
+    val list: List<CityOverview>
 )
 
-@Entity(tableName = "city_table")
-data class City(
-    @PrimaryKey val name: String,
+data class CityOverview(
+    val name: String,
     val clouds: Clouds,
     val coord: Coord,
     val dt: Int,
@@ -21,6 +17,19 @@ data class City(
     val weather: List<Weather>,
     val wind: Wind
 )
+{
+    fun toCachedModel() : CachedCityOverview {
+        return CachedCityOverview(
+            cityId=id,
+            name=name,
+            country=sys.country,
+            temp=main.temp,
+            temp_max=main.temp_max,
+            temp_min=main.temp_min,
+            humidity=main.humidity
+        )
+    }
+}
 
 data class Clouds(
     val all: Int
