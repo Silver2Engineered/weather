@@ -20,6 +20,7 @@ data class CityOverview(
 {
     fun toCachedModel() : CachedCityOverview {
         return CachedCityOverview(
+            cityId=id,
             name=name,
             country=sys.country,
             temp=main.temp,

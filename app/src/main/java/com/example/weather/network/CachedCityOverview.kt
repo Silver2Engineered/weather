@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "city_overview_table")
 data class CachedCityOverview(
-    @PrimaryKey val name: String,
+    @PrimaryKey val cityId: Int,
+    val name: String,
     val country: String,
     val temp: Double,
     val temp_max: Double,
