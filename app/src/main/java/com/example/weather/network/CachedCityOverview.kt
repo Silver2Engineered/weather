@@ -3,7 +3,7 @@ package com.example.weather.network
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "city_table")
+@Entity(tableName = "city_overview_table")
 data class CachedCityOverview(
     @PrimaryKey val name: String,
     val country: String,
@@ -16,15 +16,15 @@ data class CachedCityOverview(
     fun toDomainModel(): CityOverview {
         return CityOverview(
             name=name,
-            clouds=Clouds(-1),
-            coord=Coord(-1.0,-1.0),
-            dt=-1,
-            id=-1,
-            main=Main(-1.0,-1,humidity,-1,-1,temp,temp_max,temp_min),
-            sys=Sys(country,-1,-1,-1),
-            visibility=-1,
-            weather=listOf(Weather("","",-1,"")),
-            wind=Wind(-1,-1.0)
+            clouds=Clouds(default_int),
+            coord=Coord(default_double,default_double),
+            dt=default_int,
+            id=default_int,
+            main=Main(default_double,default_int,humidity,default_int,default_int,temp,temp_max,temp_min),
+            sys=Sys(country,default_int,default_int,default_int),
+            visibility=default_int,
+            weather=listOf(Weather(empty_string,empty_string,default_int,empty_string)),
+            wind=Wind(default_int,default_double)
         )
     }
 }

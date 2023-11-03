@@ -6,13 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = arrayOf(CityOverview::class), version = 1, exportSchema = false)
+@Database(entities =
+[
+    CachedCityOverview::class,
+    CachedCityDetails::class],
+    version = 1, exportSchema = false)
 public abstract class CityRoomDatabase : RoomDatabase() {
 
-    abstract fun cityDao(): CityDao
+    abstract fun cityDao(): CityOverviewDao
 
     companion object {
-        @Volatile
         private var INSTANCE: CityRoomDatabase? = null
 
         fun getDatabase(context: Context): CityRoomDatabase {
@@ -20,7 +23,7 @@ public abstract class CityRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CityRoomDatabase::class.java,
-                    "word_database"
+                    "city_database"
                 ).build()
                 INSTANCE = instance
                 // return instance
