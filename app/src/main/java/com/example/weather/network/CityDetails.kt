@@ -19,6 +19,7 @@ data class CityDetails(
 {
     fun toCachedModel(): CachedCityDetails {
         return CachedCityDetails(
+            cityId=id,
             name=name,
             country=sys.country,
             temp=main.temp,

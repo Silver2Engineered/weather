@@ -21,8 +21,8 @@ interface CityOverviewDao {
 @Dao
 interface CityDetailsDao {
 
-    @Query("SELECT * FROM city_details_table where cityId = cityId")
-    fun getCityData(cityId: String): List<CachedCityDetails>
+    @Query("SELECT * FROM city_details_table WHERE id = :cityId")
+    fun getCityData(cityId: Int): List<CachedCityDetails>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cachedCityData: CachedCityDetails)
