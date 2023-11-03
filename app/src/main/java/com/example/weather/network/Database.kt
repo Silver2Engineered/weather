@@ -7,13 +7,15 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities =
-[
-    CachedCityOverview::class,
-    CachedCityDetails::class],
+    [
+        CachedCityOverview::class,
+        CachedCityDetails::class
+    ],
     version = 1, exportSchema = false)
 public abstract class CityRoomDatabase : RoomDatabase() {
 
-    abstract fun cityDao(): CityOverviewDao
+    abstract fun cityOverviewDao(): CityOverviewDao
+    abstract fun cityDetailsDao(): CityDetailsDao
 
     companion object {
         private var INSTANCE: CityRoomDatabase? = null

@@ -7,10 +7,10 @@ import androidx.room.Query
 @Dao
 interface CityOverviewDao {
 
-    @Query("SELECT * FROM city_overview_table where name = name")
+    @Query("SELECT * FROM city_overview_table")
     fun getCities(): List<CachedCityOverview>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cachedCity: CachedCityOverview)
 
     @Query("DELETE FROM city_overview_table")
@@ -20,11 +20,11 @@ interface CityOverviewDao {
 @Dao
 interface CityDetailsDao {
 
-    @Query("SELECT * FROM city_details_table ORDER BY name ASC")
+    @Query("SELECT * FROM city_details_table")
     fun getCityData(): List<CachedCityDetails>
 
-    @Insert
-    suspend fun insert(cachedCityData: CachedCityDetails)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(cachedCityData: CachedCityDetails, cityId: String)
 
     @Query("DELETE FROM city_details_table")
     suspend fun deleteAll()

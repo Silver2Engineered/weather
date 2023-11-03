@@ -21,7 +21,7 @@ data class CachedCityDetails(
 {
     fun toDomainModel(): CityDetails {
         return CityDetails(
-            base= empty_string,
+            base= EMPTY_STRING,
             cod=default_int,
             timezone=default_int,
             name=name,
@@ -31,8 +31,8 @@ data class CachedCityDetails(
             id=-1,
             main=Main(default_double,default_int,humidity,pressure,default_int,temp,temp_max,temp_min),
             sys=Sys(country,sunrise,sunset,default_int),
-            visibility=-1,
-            weather= mutableListOf(Weather(description, icon, default_int, empty_string)),
+            visibility=default_int,
+            weather= mutableListOf(Weather(description, icon, default_int, EMPTY_STRING)),
             wind=Wind(default_int,wind)
         )
     }

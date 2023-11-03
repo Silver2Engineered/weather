@@ -23,7 +23,7 @@ data class CachedCityOverview(
             main=Main(default_double,default_int,humidity,default_int,default_int,temp,temp_max,temp_min),
             sys=Sys(country,default_int,default_int,default_int),
             visibility=default_int,
-            weather=listOf(Weather(empty_string,empty_string,default_int,empty_string)),
+            weather=listOf(Weather(EMPTY_STRING,EMPTY_STRING,default_int,EMPTY_STRING)),
             wind=Wind(default_int,default_double)
         )
     }
