@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weather.network.CityOverview
 import com.example.weather.network.CityRoomDatabase
-import com.example.weather.network.WeatherApi
-import com.example.weather.network.WeatherApiResponse
 import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.launch
 
@@ -18,9 +16,9 @@ const val units = "metric"
 
 class CityPickerViewModel(application: Application) : AndroidViewModel(application){
 
-    private var _cities = MutableLiveData<List<CityOverview>>()
-    var cities: LiveData<List<CityOverview>> = _cities
     private val cityRepository = CityRepository(CityRoomDatabase.getDatabase(application))
+    private var _cities = cityRepository.cityOverview
+    var cities: MutableLiveData<List<CityOverview>> = _cities
     /**
      * Gets city information from the Weather API Retrofit service and updates the
      * [cities] [List] [LiveData].
@@ -28,20 +26,7 @@ class CityPickerViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getCityInfo() {
         viewModelScope.launch {
-            try {
-                val response: WeatherApiResponse = WeatherApi.retrofitService.getCities(cityIds, appId, units)
-                cityRepository.insertCityOverview()
-               _cities.value = response.list
-            } catch (e: Exception) {
-                _cities.value = listOf()
-            }
-        }
-    }
-
-    fun getCityOverviewFromDatabase(cityId: Int) {
-        viewModelScope.launch {
-            val cachedCityOverview = cityRepository.getCityOverview()
-            _cities.value = cachedCityOverview?.map{it.toDomainModel()}
+            cityRepository.refreshCityOverview()
         }
     }
 }
