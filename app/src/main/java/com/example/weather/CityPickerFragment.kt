@@ -13,7 +13,7 @@ import com.example.weather.databinding.FragmentCityPickerBinding
 class CityPickerFragment : Fragment() {
 
     private val viewModel: CityPickerViewModel by viewModels {
-        DetailsViewModel.Factory((activity?.application as Application).repository)
+        CityPickerViewModel.Factory((activity?.application as Application).repository)
     }
     private lateinit var recyclerView: RecyclerView
     private lateinit var cityPickerAdapter: CityPickerAdapter
