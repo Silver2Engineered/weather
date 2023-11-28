@@ -1,12 +1,11 @@
 package com.example.weather
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.weather.network.CityOverview
-import com.example.weather.network.CityRoomDatabase
 import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.launch
 
@@ -14,10 +13,9 @@ const val cityIds = "4772354,5368361,5128581,4887398,4699066,5809844,5856195,541
 const val appId = "bd4472d97ca0b479dc32513cf50a1bf3"
 const val units = "metric"
 
-class CityPickerViewModel(application: Application) : AndroidViewModel(application){
+class CityPickerViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private val cityRepository = CityRepository(CityRoomDatabase.getDatabase(application))
-    private var _cities = cityRepository.cityOverview
+    private var _cities = repository.cityOverview
     var cities: MutableLiveData<List<CityOverview>> = _cities
     /**
      * Gets city information from the Weather API Retrofit service and updates the
@@ -26,7 +24,17 @@ class CityPickerViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getCityInfo() {
         viewModelScope.launch {
-            cityRepository.refreshCityOverview()
+            repository.refreshCityOverview()
+        }
+    }
+
+    class Factory(val repository: CityRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return CityPickerViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
 }

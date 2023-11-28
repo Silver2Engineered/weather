@@ -2,7 +2,6 @@ package com.example.weather
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,9 @@ internal const val url_suffix = "@2x.png"
 class DetailsFragment : Fragment() {
 
     private lateinit var cityId: String
-    private val viewModel: DetailsViewModel by viewModels()
+    private val viewModel: DetailsViewModel by viewModels {
+        DetailsViewModel.Factory((activity?.application as Application).repository)
+    }
 
     companion object {
         val CITY = "city"

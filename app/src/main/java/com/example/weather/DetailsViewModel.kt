@@ -1,19 +1,17 @@
 package com.example.weather
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.weather.network.CityDetails
-import com.example.weather.network.CityRoomDatabase.Companion.getDatabase
 import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(application: Application) : AndroidViewModel(application) {
+class DetailsViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private val cityRepository = CityRepository(getDatabase(application))
-    private var _cityData = cityRepository.cityDetails
+    private var _cityData = repository.cityDetails
     var cityData: MutableLiveData<CityDetails> = _cityData
 
     /**
@@ -23,8 +21,18 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
 
     fun getCityWeather(cityId: String) {
         viewModelScope.launch {
-            cityRepository.refreshCityDetails(cityId)
+            repository.refreshCityDetails(cityId)
         }
 
+    }
+
+    class Factory(val repository: CityRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return DetailsViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 }
