@@ -14,7 +14,7 @@ const val units = "metric"
 
 class CityPickerViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private val _cities = repository.cityOverview
+    private var _cities = repository.cityOverview
     val cities: LiveData<List<CityOverview>> = _cities
     /**
      * Gets city information from the Weather API Retrofit service and updates the

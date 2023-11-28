@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private val _cityData = repository.cityDetails
+    private var _cityData = repository.cityDetails
     val cityData: LiveData<CityDetails> = _cityData
 
     /**

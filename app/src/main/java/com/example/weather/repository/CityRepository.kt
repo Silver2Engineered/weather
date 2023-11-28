@@ -14,9 +14,9 @@ import kotlinx.coroutines.withContext
 
 class CityRepository (private val database: CityRoomDatabase) {
 
-    private val _cityOverview = MutableLiveData<List<CityOverview>>()
+    private var _cityOverview = MutableLiveData<List<CityOverview>>()
     val cityOverview: LiveData<List<CityOverview>> = _cityOverview
-    private val _cityDetails = MutableLiveData<CityDetails>()
+    private var _cityDetails = MutableLiveData<CityDetails>()
     val cityDetails: LiveData<CityDetails> = _cityDetails
 
     suspend fun refreshCityOverview() {
