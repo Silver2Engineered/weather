@@ -1,7 +1,6 @@
 package com.example.weather
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -11,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private var _cityData = repository.cityDetails
-    var cityData: MutableLiveData<CityDetails> = _cityData
+    private val _cityData = repository.cityDetails
+    val cityData: LiveData<CityDetails> = _cityData
 
     /**
      * Gets city information from the Weather API Retrofit service and updates the

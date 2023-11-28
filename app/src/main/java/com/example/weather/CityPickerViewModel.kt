@@ -1,7 +1,6 @@
 package com.example.weather
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -15,8 +14,8 @@ const val units = "metric"
 
 class CityPickerViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private var _cities = repository.cityOverview
-    var cities: MutableLiveData<List<CityOverview>> = _cities
+    private val _cities = repository.cityOverview
+    val cities: LiveData<List<CityOverview>> = _cities
     /**
      * Gets city information from the Weather API Retrofit service and updates the
      * [cities] [List] [LiveData].

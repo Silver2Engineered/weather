@@ -1,5 +1,6 @@
 package com.example.weather.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weather.appId
 import com.example.weather.cityIds
@@ -13,10 +14,10 @@ import kotlinx.coroutines.withContext
 
 class CityRepository (private val database: CityRoomDatabase) {
 
-    private var _cityOverview = MutableLiveData<List<CityOverview>>()
-    var cityOverview: MutableLiveData<List<CityOverview>> = _cityOverview
-    private var _cityDetails = MutableLiveData<CityDetails>()
-    var cityDetails: MutableLiveData<CityDetails> = _cityDetails
+    private val _cityOverview = MutableLiveData<List<CityOverview>>()
+    val cityOverview: LiveData<List<CityOverview>> = _cityOverview
+    private val _cityDetails = MutableLiveData<CityDetails>()
+    val cityDetails: LiveData<CityDetails> = _cityDetails
 
     suspend fun refreshCityOverview() {
         withContext(Dispatchers.IO) {
