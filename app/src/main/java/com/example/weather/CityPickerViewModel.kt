@@ -30,7 +30,7 @@ class CityPickerViewModel(private val repository: CityRepository) : ViewModel() 
 
     class Factory(val repository: CityRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(CityPickerViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return CityPickerViewModel(repository) as T
             }

@@ -26,7 +26,7 @@ class DetailsViewModel(private val repository: CityRepository) : ViewModel() {
 
     }
 
-    class Factory(val repository: CityRepository) : ViewModelProvider.Factory {
+    class Factory(private val repository: CityRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
