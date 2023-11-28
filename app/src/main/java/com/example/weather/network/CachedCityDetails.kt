@@ -29,7 +29,7 @@ data class CachedCityDetails(
             clouds=Clouds(default_int),
             coord=Coord(default_double,default_double),
             dt=default_int,
-            id=-1,
+            id=cityId,
             main=Main(default_double,default_int,humidity,pressure,default_int,temp,temp_max,temp_min),
             sys=Sys(country,sunrise,sunset,default_int),
             visibility=default_int,

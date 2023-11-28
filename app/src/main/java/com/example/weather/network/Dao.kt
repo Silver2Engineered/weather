@@ -12,7 +12,7 @@ interface CityOverviewDao {
     fun getCities(): List<CachedCityOverview>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(cachedCity: CachedCityOverview)
+    suspend fun insert(cachedCity: List<CachedCityOverview>)
 
     @Query("DELETE FROM city_overview_table")
     suspend fun deleteAll()
@@ -22,7 +22,7 @@ interface CityOverviewDao {
 interface CityDetailsDao {
 
     @Query("SELECT * FROM city_details_table WHERE cityId = :cityId")
-    fun getCityData(cityId: Int): List<CachedCityDetails>
+    fun getCityData(cityId: Int): CachedCityDetails
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cachedCityData: CachedCityDetails)

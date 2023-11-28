@@ -5,19 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-
-@Database(entities =
-    [
-        CachedCityOverview::class,
-        CachedCityDetails::class
-    ],
-    version = 1, exportSchema = false)
-public abstract class CityRoomDatabase : RoomDatabase() {
-
-    abstract fun cityOverviewDao(): CityOverviewDao
-    abstract fun cityDetailsDao(): CityDetailsDao
+@Database(entities = [CachedCityOverview::class, CachedCityDetails::class], version = 1, exportSchema = false)
+abstract class CityRoomDatabase : RoomDatabase() {
+    abstract val cityOverviewDao: CityOverviewDao
+    abstract val cityDetailsDao: CityDetailsDao
 
     companion object {
+        @Volatile
         private var INSTANCE: CityRoomDatabase? = null
 
         fun getDatabase(context: Context): CityRoomDatabase {
@@ -26,9 +20,11 @@ public abstract class CityRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     CityRoomDatabase::class.java,
                     "city_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration() // This handles schema changes by recreating the database
+                    .build()
+
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

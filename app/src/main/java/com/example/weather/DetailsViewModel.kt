@@ -1,18 +1,18 @@
 package com.example.weather
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.weather.network.CityDetails
-import com.example.weather.network.WeatherApi
+import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.launch
 
-class DetailsViewModel : ViewModel() {
+class DetailsViewModel(private val repository: CityRepository) : ViewModel() {
 
-    private var _cityData = MutableLiveData<CityDetails?>()
+    private var _cityData = repository.cityDetails
+    val cityData: LiveData<CityDetails> = _cityData
 
-    var cityData: MutableLiveData<CityDetails?> = _cityData
     /**
      * Gets city information from the Weather API Retrofit service and updates the
      * [cityData] [LiveData].
@@ -20,13 +20,18 @@ class DetailsViewModel : ViewModel() {
 
     fun getCityWeather(cityId: String) {
         viewModelScope.launch {
-            try {
-                val response: CityDetails = WeatherApi.retrofitService.getCityData(cityId, appId, units)
-                _cityData.value = response
-            } catch (e: Exception) {
-                _cityData.value = null
-            }
+            repository.refreshCityDetails(cityId)
         }
 
+    }
+
+    class Factory(private val repository: CityRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return DetailsViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 }
