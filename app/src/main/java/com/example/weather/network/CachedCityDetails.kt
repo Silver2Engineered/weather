@@ -17,14 +17,15 @@ data class CachedCityDetails(
     val sunrise: Int,
     val sunset: Int,
     val icon: String,
-    val description: String
+    val description: String,
+    val timezone: Int
 )
 {
     fun toDomainModel(): CityDetails {
         return CityDetails(
             base= EMPTY_STRING,
             cod=default_int,
-            timezone=default_int,
+            timezone=timezone,
             name=name,
             clouds=Clouds(default_int),
             coord=Coord(default_double,default_double),

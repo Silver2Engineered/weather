@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CachedCityOverview::class, CachedCityDetails::class], version = 1, exportSchema = false)
+@Database(entities = [CachedCityOverview::class, CachedCityDetails::class], version = 2, exportSchema = false)
 abstract class CityRoomDatabase : RoomDatabase() {
     abstract val cityOverviewDao: CityOverviewDao
     abstract val cityDetailsDao: CityDetailsDao

@@ -31,7 +31,8 @@ data class CityDetails(
             sunrise=sys.sunrise,
             sunset=sys.sunset,
             icon=weather[0].icon,
-            description=weather[0].description
+            description=weather[0].description,
+            timezone=timezone
         )
     }
 }

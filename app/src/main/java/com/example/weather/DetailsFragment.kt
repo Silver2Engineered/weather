@@ -106,7 +106,13 @@ class DetailsFragment : Fragment() {
         binding.description.text = EMPTY_STRING
         binding.sunrise.text = EMPTY_STRING
         binding.sunset.text = EMPTY_STRING
+        binding.humidityIcon.visibility = View.GONE
         binding.loading.visibility = View.GONE
+        binding.firstLine.visibility = View.GONE
+        binding.secondLine.visibility = View.GONE
+        binding.snag.visibility = View.VISIBLE
+        binding.errorMessage.visibility = View.VISIBLE
+        binding.errorMessage.text = getString(R.string.error_message)
     }
 
     private fun displayDetailsLoading() {
@@ -128,6 +134,7 @@ class DetailsFragment : Fragment() {
         binding.firstLine.visibility = View.GONE
         binding.secondLine.visibility = View.GONE
         binding.loading.visibility = View.VISIBLE
+        binding.snag.visibility = View.GONE
 
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -144,12 +151,13 @@ class DetailsFragment : Fragment() {
         binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
         binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
         binding.windspeedLabel.text = getString(R.string.windspeed)
-        binding.pressureLabel.text = getString(R.string.sunrise)
-        binding.sunriseLabel.text = getString(R.string.sunset)
-        binding.sunsetLabel.text = getString(R.string.pressure)
+        binding.pressureLabel.text = getString(R.string.pressure)
+        binding.sunriseLabel.text = getString(R.string.sunrise)
+        binding.sunsetLabel.text = getString(R.string.sunset)
         binding.humidityIcon.visibility = View.VISIBLE
         binding.firstLine.visibility = View.VISIBLE
         binding.secondLine.visibility = View.VISIBLE
+        binding.snag.visibility = View.GONE
         Glide.with(this)
             .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()

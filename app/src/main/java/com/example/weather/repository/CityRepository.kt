@@ -41,7 +41,7 @@ class CityRepository (private val database: CityRoomDatabase) {
         withContext(Dispatchers.IO) {
             try {
                 val cityDetails =
-                    WeatherApi.retrofitService.getCityData(cityId, "fake", units).toCachedModel()
+                    WeatherApi.retrofitService.getCityData(cityId, appId, units).toCachedModel()
                 database.cityDetailsDao.insert(cityDetails)
                 _cityDetails.postValue(StateDetails.Success(
                     database.cityDetailsDao.getCityData(cityId.toInt()).toDomainModel()))
