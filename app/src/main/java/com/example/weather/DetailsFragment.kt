@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.weather.databinding.FragmentDetailsBinding
 import com.example.weather.network.CityDetails
+import com.example.weather.network.EMPTY_STRING
+import com.example.weather.network.StateDetails
 import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -54,7 +56,11 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.cityData.observe(viewLifecycleOwner) {
-            updateBindings(binding, it)
+            when(it) {
+                is StateDetails.Error -> displayDetailsError()
+                is StateDetails.Loading -> displayDetailsLoading()
+                is StateDetails.Success -> displayDetailsSuccess(binding, it.data)
+            }
         }
         viewModel.getCityWeather(cityId)
     }
@@ -66,6 +72,7 @@ class DetailsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
     private fun formatLowAndHighDetails(it: CityDetails?): String {
         val low = convertCelsiusToFahrenheit(it?.main?.temp_min).toString()
@@ -86,8 +93,46 @@ class DetailsFragment : Fragment() {
         val formatter = DateTimeFormatter.ofPattern("K:mm a", Locale.ENGLISH)
         return instant.atOffset(offset).format(formatter)
     }
+
+
+    private fun displayDetailsError() {
+        binding.name.text = EMPTY_STRING
+        binding.country.text = EMPTY_STRING
+        binding.temp.text = EMPTY_STRING
+        binding.lowAndHigh.text = EMPTY_STRING
+        binding.humidity.text = EMPTY_STRING
+        binding.windspeedAmount.text = EMPTY_STRING
+        binding.pressureAmount.text = EMPTY_STRING
+        binding.description.text = EMPTY_STRING
+        binding.sunrise.text = EMPTY_STRING
+        binding.sunset.text = EMPTY_STRING
+        binding.loading.visibility = View.GONE
+    }
+
+    private fun displayDetailsLoading() {
+        binding.name.text = EMPTY_STRING
+        binding.country.text = EMPTY_STRING
+        binding.temp.text = EMPTY_STRING
+        binding.lowAndHigh.text = EMPTY_STRING
+        binding.humidity.text = EMPTY_STRING
+        binding.windspeedAmount.text = EMPTY_STRING
+        binding.pressureAmount.text = EMPTY_STRING
+        binding.description.text = EMPTY_STRING
+        binding.sunrise.text = EMPTY_STRING
+        binding.sunset.text = EMPTY_STRING
+        binding.windspeedLabel.text = EMPTY_STRING
+        binding.pressureLabel.text = EMPTY_STRING
+        binding.sunriseLabel.text = EMPTY_STRING
+        binding.sunsetLabel.text = EMPTY_STRING
+        binding.humidityIcon.visibility = View.GONE
+        binding.firstLine.visibility = View.GONE
+        binding.secondLine.visibility = View.GONE
+        binding.loading.visibility = View.VISIBLE
+
+    }
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun updateBindings(binding: FragmentDetailsBinding, it: CityDetails?) {
+    private fun displayDetailsSuccess(binding: FragmentDetailsBinding, it: CityDetails?) {
+        binding.loading.visibility = View.GONE
         binding.name.text = it?.name.toString()
         binding.country.text = it?.sys?.country.toString()
         binding.temp.text = convertCelsiusToFahrenheit(it?.main?.temp).toString() + "℉"
@@ -98,6 +143,13 @@ class DetailsFragment : Fragment() {
         binding.description.text = it!!.weather[0].description[0].toUpperCase() + it!!.weather[0].description.substring(1)
         binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
         binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
+        binding.windspeedLabel.text = getString(R.string.windspeed)
+        binding.pressureLabel.text = getString(R.string.sunrise)
+        binding.sunriseLabel.text = getString(R.string.sunset)
+        binding.sunsetLabel.text = getString(R.string.pressure)
+        binding.humidityIcon.visibility = View.VISIBLE
+        binding.firstLine.visibility = View.VISIBLE
+        binding.secondLine.visibility = View.VISIBLE
         Glide.with(this)
             .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()
