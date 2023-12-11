@@ -120,6 +120,8 @@ class DetailsFragment : Fragment() {
         binding.country.text = EMPTY_STRING
         binding.temp.text = EMPTY_STRING
         binding.lowAndHigh.text = EMPTY_STRING
+        binding.snag.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
         binding.humidity.text = EMPTY_STRING
         binding.windspeedAmount.text = EMPTY_STRING
         binding.pressureAmount.text = EMPTY_STRING
@@ -158,6 +160,7 @@ class DetailsFragment : Fragment() {
         binding.firstLine.visibility = View.VISIBLE
         binding.secondLine.visibility = View.VISIBLE
         binding.snag.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
         Glide.with(this)
             .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()
