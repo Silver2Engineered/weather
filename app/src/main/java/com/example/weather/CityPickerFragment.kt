@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.FragmentCityPickerBinding
+import com.example.weather.network.CityOverview
+import com.example.weather.network.StateOverview
 
 class CityPickerFragment : Fragment() {
 
@@ -35,9 +37,36 @@ class CityPickerFragment : Fragment() {
         cityPickerAdapter = CityPickerAdapter(context)
         recyclerView.adapter = cityPickerAdapter
         viewModel.cities.observe(viewLifecycleOwner) {
-            cityPickerAdapter.updateCityData(it)
+            when(it) {
+                is StateOverview.Error -> displayOverviewError()
+                is StateOverview.Loading -> displayOverviewLoading()
+                is StateOverview.Success -> displayOverviewSuccess(it.data)
+            }
         }
         viewModel.getCityInfo()
+    }
+
+    private fun displayOverviewError() {
+        binding.recyclerView.visibility = View.GONE
+        binding.loading.visibility = View.GONE
+        binding.errorMessage.visibility = View.VISIBLE
+        binding.snag.visibility = View.VISIBLE
+    }
+
+    private fun displayOverviewLoading() {
+        binding.recyclerView.visibility = View.GONE
+        binding.loading.visibility = View.VISIBLE
+        binding.errorMessage.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
+    }
+
+    private fun displayOverviewSuccess(cities: List<CityOverview>) {
+        cityPickerAdapter.updateCityData(cities)
+        binding.recyclerView.visibility = View.VISIBLE
+        binding.loading.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
+        binding.snag.visibility = View.GONE
+
     }
 
 }

@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/humidity_indicator" />
+        tools:src="@drawable/humidity_indicator"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/name"
@@ -33,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weatherIcon"
-        tools:text="Chicago" />
+        tools:text="Chicago"/>
 
     <TextView
         android:id="@+id/country"
@@ -45,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name"
-        tools:text="USA" />
+        tools:text="USA"/>
 
     <View
         android:id="@+id/firstLine"
@@ -58,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/country" />
+        app:layout_constraintTop_toBottomOf="@id/country"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/temp"
@@ -125,7 +127,8 @@
         app:layout_constraintEnd_toStartOf="@id/humidity"
         app:layout_constraintTop_toTopOf="@id/lowAndHigh"
         app:srcCompat="@drawable/humidity_indicator"
-        tools:src="@drawable/humidity_indicator" />
+        tools:src="@drawable/humidity_indicator"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/secondLine"
@@ -137,7 +140,8 @@
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/humidity" />
+        app:layout_constraintTop_toBottomOf="@id/humidity"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/windspeedLabel"
@@ -152,7 +156,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/secondLine"
-        android:text="Windspeed" />
+        android:text="@string/windspeed"/>
 
     <TextView
         android:id="@+id/sunriseLabel"
@@ -167,7 +171,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pressureLabel"
-        android:text="Sunrise" />
+        android:text="@string/sunrise"/>
 
     <TextView
         android:id="@+id/sunsetLabel"
@@ -182,7 +186,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sunriseLabel"
-        android:text="Sunset" />
+        android:text="@string/sunset"/>
 
     <TextView
         android:id="@+id/pressureLabel"
@@ -197,7 +201,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/windspeedLabel"
-        android:text="Pressure" />
+        android:text="@string/pressure"/>
 
     <TextView
         android:id="@+id/windspeedAmount"
@@ -259,5 +263,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sunrise"
         tools:text="7:12 PM" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorSize="60dp"
+        app:indicatorColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+        android:indeterminate="true"/>
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:paddingTop="50dp"
+        android:paddingBottom="6dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/snag"
+        tools:text="@string/error_message"
+        android:visibility="visible"
+        android:text="@string/error_message"/>
+
+    <ImageView
+        android:id="@+id/snag"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="96dp"
+        android:paddingTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/snag_error"
+        app:srcCompat="@drawable/snag_error"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
