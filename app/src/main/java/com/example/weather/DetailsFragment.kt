@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.weather.databinding.FragmentDetailsBinding
 import com.example.weather.network.CityDetails
-import com.example.weather.network.EMPTY_STRING
 import com.example.weather.network.StateDetails
 import java.time.Instant
 import java.time.ZoneOffset
@@ -96,16 +95,16 @@ class DetailsFragment : Fragment() {
 
 
     private fun displayDetailsError() {
-        binding.name.text = EMPTY_STRING
-        binding.country.text = EMPTY_STRING
-        binding.temp.text = EMPTY_STRING
-        binding.lowAndHigh.text = EMPTY_STRING
-        binding.humidity.text = EMPTY_STRING
-        binding.windspeedAmount.text = EMPTY_STRING
-        binding.pressureAmount.text = EMPTY_STRING
-        binding.description.text = EMPTY_STRING
-        binding.sunrise.text = EMPTY_STRING
-        binding.sunset.text = EMPTY_STRING
+        binding.name.visibility = View.GONE
+        binding.country.visibility = View.GONE
+        binding.temp.visibility = View.GONE
+        binding.lowAndHigh.visibility = View.GONE
+        binding.humidity.visibility = View.GONE
+        binding.windspeedAmount.visibility = View.GONE
+        binding.pressureAmount.visibility = View.GONE
+        binding.description.visibility = View.GONE
+        binding.sunrise.visibility = View.GONE
+        binding.sunset.visibility = View.GONE
         binding.humidityIcon.visibility = View.GONE
         binding.loading.visibility = View.GONE
         binding.firstLine.visibility = View.GONE
@@ -116,22 +115,22 @@ class DetailsFragment : Fragment() {
     }
 
     private fun displayDetailsLoading() {
-        binding.name.text = EMPTY_STRING
-        binding.country.text = EMPTY_STRING
-        binding.temp.text = EMPTY_STRING
-        binding.lowAndHigh.text = EMPTY_STRING
+        binding.name.visibility = View.GONE
+        binding.country.visibility = View.GONE
+        binding.temp.visibility = View.GONE
+        binding.lowAndHigh.visibility = View.GONE
         binding.snag.visibility = View.GONE
         binding.errorMessage.visibility = View.GONE
-        binding.humidity.text = EMPTY_STRING
-        binding.windspeedAmount.text = EMPTY_STRING
-        binding.pressureAmount.text = EMPTY_STRING
-        binding.description.text = EMPTY_STRING
-        binding.sunrise.text = EMPTY_STRING
-        binding.sunset.text = EMPTY_STRING
-        binding.windspeedLabel.text = EMPTY_STRING
-        binding.pressureLabel.text = EMPTY_STRING
-        binding.sunriseLabel.text = EMPTY_STRING
-        binding.sunsetLabel.text = EMPTY_STRING
+        binding.humidity.visibility = View.GONE
+        binding.windspeedAmount.visibility = View.GONE
+        binding.pressureAmount.visibility = View.GONE
+        binding.description.visibility = View.GONE
+        binding.sunrise.visibility = View.GONE
+        binding.sunset.visibility = View.GONE
+        binding.windspeedLabel.visibility = View.GONE
+        binding.pressureLabel.visibility = View.GONE
+        binding.sunriseLabel.visibility = View.GONE
+        binding.sunsetLabel.visibility = View.GONE
         binding.humidityIcon.visibility = View.GONE
         binding.firstLine.visibility = View.GONE
         binding.secondLine.visibility = View.GONE
