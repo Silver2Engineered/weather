@@ -2,6 +2,7 @@ package com.example.weather
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -111,7 +112,6 @@ class DetailsFragment : Fragment() {
         binding.secondLine.visibility = View.GONE
         binding.snag.visibility = View.VISIBLE
         binding.errorMessage.visibility = View.VISIBLE
-        binding.errorMessage.text = getString(R.string.error_message)
     }
 
     private fun displayDetailsLoading() {
@@ -142,6 +142,7 @@ class DetailsFragment : Fragment() {
     private fun displayDetailsSuccess(binding: FragmentDetailsBinding, it: CityDetails?) {
         binding.loading.visibility = View.GONE
         binding.name.text = it?.name.toString()
+        Log.e("hello","here")
         binding.country.text = it?.sys?.country.toString()
         binding.temp.text = convertCelsiusToFahrenheit(it?.main?.temp).toString() + "℉"
         binding.lowAndHigh.text = formatLowAndHighDetails(it)
@@ -155,11 +156,25 @@ class DetailsFragment : Fragment() {
         binding.pressureLabel.text = getString(R.string.pressure)
         binding.sunriseLabel.text = getString(R.string.sunrise)
         binding.sunsetLabel.text = getString(R.string.sunset)
+        binding.name.visibility = View.VISIBLE
+        binding.country.visibility = View.VISIBLE
+        binding.temp.visibility = View.VISIBLE
+        binding.lowAndHigh.visibility = View.VISIBLE
+        binding.snag.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
+        binding.humidity.visibility = View.VISIBLE
+        binding.windspeedAmount.visibility = View.VISIBLE
+        binding.pressureAmount.visibility = View.VISIBLE
+        binding.description.visibility = View.VISIBLE
+        binding.sunrise.visibility = View.VISIBLE
+        binding.sunset.visibility = View.VISIBLE
+        binding.windspeedLabel.visibility = View.VISIBLE
+        binding.pressureLabel.visibility = View.VISIBLE
+        binding.sunriseLabel.visibility = View.VISIBLE
+        binding.sunsetLabel.visibility = View.VISIBLE
         binding.humidityIcon.visibility = View.VISIBLE
         binding.firstLine.visibility = View.VISIBLE
         binding.secondLine.visibility = View.VISIBLE
-        binding.snag.visibility = View.GONE
-        binding.errorMessage.visibility = View.GONE
         Glide.with(this)
             .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()

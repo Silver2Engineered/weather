@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/humidity_indicator" />
+        tools:src="@drawable/humidity_indicator"/>
 
     <TextView
         android:id="@+id/name"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weatherIcon"
-        tools:text="Chicago" />
+        tools:text="Chicago"/>
 
     <TextView
         android:id="@+id/country"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name"
-        tools:text="USA" />
+        tools:text="USA"/>
 
     <View
         android:id="@+id/firstLine"
@@ -58,7 +58,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/country" />
+        app:layout_constraintTop_toBottomOf="@id/country"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/temp"
@@ -125,7 +126,8 @@
         app:layout_constraintEnd_toStartOf="@id/humidity"
         app:layout_constraintTop_toTopOf="@id/lowAndHigh"
         app:srcCompat="@drawable/humidity_indicator"
-        tools:src="@drawable/humidity_indicator" />
+        tools:src="@drawable/humidity_indicator"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/secondLine"
@@ -137,7 +139,8 @@
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/humidity" />
+        app:layout_constraintTop_toBottomOf="@id/humidity"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/windspeedLabel"
@@ -282,7 +285,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/snag"
         tools:text="@string/error_message"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:text="@string/error_message"/>
 
     <ImageView
         android:id="@+id/snag"

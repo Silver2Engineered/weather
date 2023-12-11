@@ -49,7 +49,6 @@ class CityPickerFragment : Fragment() {
     private fun displayOverviewError() {
         binding.recyclerView.visibility = View.GONE
         binding.loading.visibility = View.GONE
-        binding.errorMessage.text = getString(R.string.error_message)
         binding.errorMessage.visibility = View.VISIBLE
         binding.snag.visibility = View.VISIBLE
     }
