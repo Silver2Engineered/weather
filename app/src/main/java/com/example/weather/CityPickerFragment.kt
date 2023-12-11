@@ -65,8 +65,7 @@ class CityPickerFragment : Fragment() {
         binding.recyclerView.visibility = View.VISIBLE
         binding.loading.visibility = View.GONE
         binding.errorMessage.visibility = View.GONE
-        binding.errorMessage.visibility = View.GONE
-
+        binding.snag.visibility = View.GONE
 
     }
 
