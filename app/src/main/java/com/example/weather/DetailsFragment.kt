@@ -2,7 +2,6 @@ package com.example.weather
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -148,7 +147,6 @@ class DetailsFragment : Fragment() {
     private fun displayDetailsSuccess(binding: FragmentDetailsBinding, it: CityDetails?) {
         binding.loading.visibility = View.GONE
         binding.name.text = it?.name.toString()
-        Log.e("hello","here")
         binding.country.text = it?.sys?.country.toString()
         binding.temp.text = convertCelsiusToFahrenheit(it?.main?.temp).toString() + "℉"
         binding.lowAndHigh.text = formatLowAndHighDetails(it)
@@ -158,10 +156,6 @@ class DetailsFragment : Fragment() {
         binding.description.text = it!!.weather[0].description[0].toUpperCase() + it!!.weather[0].description.substring(1)
         binding.sunrise.text = convertTime(it?.sys?.sunrise, it?.timezone)
         binding.sunset.text = convertTime(it?.sys?.sunset, it?.timezone)
-        binding.windspeedLabel.text = getString(R.string.windspeed)
-        binding.pressureLabel.text = getString(R.string.pressure)
-        binding.sunriseLabel.text = getString(R.string.sunrise)
-        binding.sunsetLabel.text = getString(R.string.sunset)
         binding.name.visibility = View.VISIBLE
         binding.country.visibility = View.VISIBLE
         binding.temp.visibility = View.VISIBLE

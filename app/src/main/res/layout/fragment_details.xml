@@ -155,7 +155,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/secondLine"/>
+        app:layout_constraintTop_toBottomOf="@id/secondLine"
+        android:text="@string/windspeed"/>
 
     <TextView
         android:id="@+id/sunriseLabel"
@@ -169,7 +170,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pressureLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/pressureLabel"
+        android:text="@string/sunrise"/>
 
     <TextView
         android:id="@+id/sunsetLabel"
@@ -183,7 +185,8 @@
         android:paddingLeft="16dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sunriseLabel" />
+        app:layout_constraintTop_toBottomOf="@id/sunriseLabel"
+        android:text="@string/sunset"/>
 
     <TextView
         android:id="@+id/pressureLabel"
@@ -197,7 +200,8 @@
         android:paddingLeft="16dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/windspeedLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/windspeedLabel"
+        android:text="@string/pressure"/>
 
     <TextView
         android:id="@+id/windspeedAmount"
