@@ -57,12 +57,16 @@ class CityPickerFragment : Fragment() {
     private fun displayOverviewLoading() {
         binding.recyclerView.visibility = View.GONE
         binding.loading.visibility = View.VISIBLE
+        binding.errorMessage.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
     }
 
     private fun displayOverviewSuccess(cities: List<CityOverview>) {
         cityPickerAdapter.updateCityData(cities)
         binding.recyclerView.visibility = View.VISIBLE
         binding.loading.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
+        binding.errorMessage.visibility = View.GONE
 
 
     }
