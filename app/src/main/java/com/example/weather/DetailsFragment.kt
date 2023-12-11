@@ -112,6 +112,11 @@ class DetailsFragment : Fragment() {
         binding.secondLine.visibility = View.GONE
         binding.snag.visibility = View.VISIBLE
         binding.errorMessage.visibility = View.VISIBLE
+        binding.windspeedLabel.visibility = View.GONE
+        binding.pressureLabel.visibility = View.GONE
+        binding.sunriseLabel.visibility = View.GONE
+        binding.sunsetLabel.visibility = View.GONE
+        binding.weatherIcon.visibility = View.GONE
     }
 
     private fun displayDetailsLoading() {
@@ -136,6 +141,7 @@ class DetailsFragment : Fragment() {
         binding.secondLine.visibility = View.GONE
         binding.loading.visibility = View.VISIBLE
         binding.snag.visibility = View.GONE
+        binding.weatherIcon.visibility = View.GONE
 
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -179,5 +185,6 @@ class DetailsFragment : Fragment() {
             .load(base_url + it!!.weather[0].icon + url_suffix)
             .centerCrop()
             .into(binding.weatherIcon)
+        binding.weatherIcon.visibility = View.VISIBLE
     }
 }

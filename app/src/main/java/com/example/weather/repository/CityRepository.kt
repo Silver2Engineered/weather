@@ -1,6 +1,5 @@
 package com.example.weather.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weather.appId
@@ -29,6 +28,11 @@ class CityRepository (private val database: CityRoomDatabase) {
                     units
                 ).list.map { it.toCachedModel() }
                 database.cityOverviewDao.insert(cityOverview)
+            }
+            catch (e: Exception) {
+                _cityOverview.postValue(StateOverview.Error(e))
+            }
+            try {
                 _cityOverview.postValue(StateOverview.Success(
                     database.cityOverviewDao.getCities().map { it.toDomainModel()}))
             }
@@ -44,12 +48,15 @@ class CityRepository (private val database: CityRoomDatabase) {
                 val cityDetails =
                     WeatherApi.retrofitService.getCityData(cityId, appId, units).toCachedModel()
                 database.cityDetailsDao.insert(cityDetails)
-                _cityDetails.postValue(StateDetails.Success(
-                    database.cityDetailsDao.getCityData(cityId.toInt()).toDomainModel()))
-                Log.e("hello","success")
             }
             catch (e: Exception) {
-                Log.e("hello",e.toString())
+                _cityDetails.postValue(StateDetails.Error(e))
+            }
+            try {
+                _cityDetails.postValue(StateDetails.Success(
+                    database.cityDetailsDao.getCityData(cityId.toInt()).toDomainModel()))
+            }
+            catch (e: Exception) {
                 _cityDetails.postValue(StateDetails.Error(e))
             }
         }
