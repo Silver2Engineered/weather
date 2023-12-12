@@ -5,7 +5,7 @@ import org.junit.Test
 
 class CityOverviewTest {
     @Test
-    fun toCachedModel() {
+    fun `City overview successfully converts to a cached model`() {
         val cityOverview = testCityOverview
         TestCase.assertEquals(cityOverview.toCachedModel(), testCachedCityOverview)
     }
