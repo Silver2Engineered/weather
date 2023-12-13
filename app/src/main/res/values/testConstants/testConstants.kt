@@ -1,3 +1,0 @@
-package values.testConstants
-
-val
