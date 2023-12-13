@@ -1,13 +1,15 @@
 package com.example.weather
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import com.example.weather.network.CityRoomDatabase
 import com.example.weather.network.StateDetails
 import com.example.weather.repository.CityRepository
+import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -15,9 +17,10 @@ import org.junit.Test
 
 class DetailsViewModelTest {
 
-    private lateinit var repository: CityRepository
+    private val repository: CityRepository = mockk(relaxed = true)
     private val database = mockk<CityRoomDatabase>(relaxed=true)
     private lateinit var detailsViewModel: DetailsViewModel
+
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -25,17 +28,22 @@ class DetailsViewModelTest {
 
     @Before
     fun setup() {
-        repository = CityRepository(database)
+        detailsViewModel = DetailsViewModel.Factory(repository).create(DetailsViewModel::class.java)
     }
 
     @Test
-    fun `Get city weather works successfully`() = runTest {
+    fun `Get city weather works successfully`() = runBlocking {
         Dispatchers.setMain(Dispatchers.Unconfined)
-        detailsViewModel = DetailsViewModel.Factory(repository).create(DetailsViewModel::class.java)
-        database.cityDetailsDao.insert(testCachedCityDetails)
+        coEvery { repository.refreshCityDetails(any())} returns mockk {
+            coEvery { repository.cityDetails } returns MutableLiveData(
+                StateDetails.Success(
+                    testCityDetails
+                )
+            )
+        }
         detailsViewModel.getCityWeather("500")
         Thread.sleep(5000)
-        TestCase.assertEquals(detailsViewModel.cityData.value, StateDetails.Success(database.cityDetailsDao.getCityData(500).toDomainModel()))
+        TestCase.assertEquals(detailsViewModel.cityData.value, StateDetails.Success(testCityDetails))
     }
 
     }
