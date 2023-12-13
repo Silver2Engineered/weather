@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather.CityPickerViewModel.Companion.convertCelsiusToFahrenheit
+import com.example.weather.CityPickerViewModel.Companion.formatLowAndHigh
 import com.example.weather.databinding.CityItemBinding
 import com.example.weather.network.CityOverview
 
@@ -37,24 +39,12 @@ class CityPickerAdapter(private val context: Context?, private var dataSet: List
         viewHolder.binding.name.text = data?.name.toString()
         viewHolder.binding.country.text = data?.sys?.country.toString()
         viewHolder.binding.temp.text = context?.resources?.getString(R.string.temp, convertCelsiusToFahrenheit(data?.main?.temp).toString())
-        viewHolder.binding.lowAndHigh.text = formatLowAndHigh(data, position)
+        viewHolder.binding.lowAndHigh.text = formatLowAndHigh(data)
         viewHolder.binding.humidity.text = context?.resources?.getString(R.string.humidity, data?.main?.humidity.toString())
         viewHolder.binding.card.setOnClickListener {
             val action = CityPickerFragmentDirections.actionCityPickerFragmentToDetailsFragment(city = data?.id.toString())
             viewHolder.binding.root.findNavController().navigate(action)
         }
-    }
-
-    private fun formatLowAndHigh(data: CityOverview?, position: Int): String {
-        val low = convertCelsiusToFahrenheit(data?.main?.temp_min).toString()
-        val high = convertCelsiusToFahrenheit(data?.main?.temp_max).toString()
-        return "$low\u2109/$high\u2109"
-    }
-
-    private fun convertCelsiusToFahrenheit(temp: Double?): Int {
-        return if (temp != null) {
-            return (temp * 9/5 + 32).toInt()
-        } else 0
     }
 
     override fun getItemCount(): Int {

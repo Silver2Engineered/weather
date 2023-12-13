@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.weather.network.CityOverview
 import com.example.weather.network.StateOverview
 import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.launch
@@ -34,6 +35,20 @@ class CityPickerViewModel(private val repository: CityRepository) : ViewModel() 
                 return CityPickerViewModel(repository) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
+        }
+    }
+
+    companion object {
+        fun convertCelsiusToFahrenheit(temp: Double?): Int {
+            return if (temp != null) {
+                return (temp * 9/5 + 32).toInt()
+            } else 0
+        }
+
+        fun formatLowAndHigh(data: CityOverview?): String {
+            val low = Companion.convertCelsiusToFahrenheit(data?.main?.temp_min).toString()
+            val high = Companion.convertCelsiusToFahrenheit(data?.main?.temp_max).toString()
+            return "$low\u2109/$high\u2109"
         }
     }
 }
